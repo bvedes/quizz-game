@@ -5,15 +5,22 @@ function getRandomInt(max) {
   return Math.floor(Math.random() * max);
 }
 
-const Questions = ({ setShow }) => {
+const Questions = ({ incrementCounter }) => {
   const [solution, setSolution] = useState();
-  const [count, setCount] = useState(0);
+  const [results, setResults] = useState([]);
 
   const [question, setQuestion] = useState(
     questions[getRandomInt(questions.length)]
   );
 
-  console.log("question: ", question);
+  const handleSolution = (option) => {
+    // 1_ verificar se a opção está correta
+    // 2- mostrar no ecrã se está correto ou não e a resposta correta.
+    const isCorrect = testSolution(option);
+    // 3- guardar informação para mostrar nos resultados.
+    setResults([...results, { ...question, userAnswer: option, isCorrect }]);
+  };
+  console.log("results: ", results);
 
   function testSolution(option) {
     console.log("option: ", option === question.solution);
@@ -22,18 +29,13 @@ const Questions = ({ setShow }) => {
     } else {
       setSolution(`Wrong, the right answer is ${question.solution}`);
     }
+    return option === question.solution;
   }
   const nextQuestion = () => {
     setSolution();
-    setCount(count + 1);
+    incrementCounter();
     setQuestion(questions[getRandomInt(questions.length)]);
   };
-
-  console.log("count: ", count);
-
-  if (count > 3) {
-    setShow("end");
-  }
 
   return (
     <div>
@@ -47,7 +49,7 @@ const Questions = ({ setShow }) => {
               <div key={idx} className="flex">
                 <button
                   className="bg-grey-500 p-2 mx-2"
-                  onClick={() => testSolution(option)}
+                  onClick={() => handleSolution(option)}
                 >
                   {option}
                 </button>
