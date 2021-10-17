@@ -1,4 +1,5 @@
-const Result = () => {
+const Result = ({ results }) => {
+  console.log("results: ", results);
   return (
     <div className="grid grid-rows-3 grid-flow-col gap-4 mt-16">
       <div className="col-span-2 bg-gray-100 flex p-2 items-center justify-center">

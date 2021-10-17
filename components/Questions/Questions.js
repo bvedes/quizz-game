@@ -5,31 +5,25 @@ function getRandomInt(max) {
   return Math.floor(Math.random() * max);
 }
 
-const Questions = ({ incrementCounter }) => {
+const Questions = ({ incrementCounter, results, setResults }) => {
   const [solution, setSolution] = useState();
-  const [results, setResults] = useState([]);
-
   const [question, setQuestion] = useState(
     questions[getRandomInt(questions.length)]
   );
 
-  const handleSolution = (option) => {
-    // 1_ verificar se a opção está correta
-    // 2- mostrar no ecrã se está correto ou não e a resposta correta.
-    const isCorrect = testSolution(option);
-    // 3- guardar informação para mostrar nos resultados.
-    setResults([...results, { ...question, userAnswer: option, isCorrect }]);
+  const handleSolution = (userAnswer) => {
+    const isCorrect = userAnswer === question.solution;
+    const score = isCorrect ? 1 : -1;
+    renderSolution(isCorrect);
+    setResults([...results, { ...question, userAnswer, isCorrect, score }]);
   };
-  console.log("results: ", results);
 
-  function testSolution(option) {
-    console.log("option: ", option === question.solution);
-    if (option === question.solution) {
+  function renderSolution(isCorrect) {
+    if (isCorrect) {
       setSolution("Correct");
     } else {
       setSolution(`Wrong, the right answer is ${question.solution}`);
     }
-    return option === question.solution;
   }
   const nextQuestion = () => {
     setSolution();

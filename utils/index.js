@@ -32,19 +32,19 @@ export const questions = [
   {
     id: 5,
     question: "What is the meaning of knife?",
-    options: ["Faca", "Fork", " Spoon", "Toothpick"],
+    options: ["Faca", "Fork", "Spoon", "Toothpick"],
     solution: "Faca",
   },
   {
     id: 6,
     question: "What is the meaning of door?",
-    options: ["Porta ", "Unshift ", " Always ", " Roof"],
+    options: ["Porta", "Unshift", "Always", "Roof"],
     solution: "Porta",
   },
   {
     id: 7,
     question: "What is the meaning of monster?",
-    options: [" Monstro ", "Way ", " Castle ", " Palace"],
+    options: ["Monstro", "Way", "Castle", "Palace"],
     solution: "Monstro",
   },
   {
@@ -56,7 +56,7 @@ export const questions = [
   {
     id: 9,
     question: "What is the meaning of tree?",
-    options: ["Árvore", "Flower ", " Branch ", " Bush"],
+    options: ["Árvore", "Flower", "Branch", "Bush"],
     solution: "Árvore",
   },
 ];

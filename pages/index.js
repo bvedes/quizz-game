@@ -6,18 +6,13 @@ import Result from "../components/Result";
 const Game = () => {
   const [show, setShow] = useState("init");
   const [count, setCount] = useState(0);
-
-  console.log("show: ", show);
-  console.log("count: ", count);
-
-  // Eu quero que o estado mude para end ao final de dez perguntas.
+  const [results, setResults] = useState([]);
 
   const incrementCounter = () => {
     setCount(count + 1);
   };
 
   useEffect(() => {
-    console.log("useEffect");
     if (count > 2) {
       setShow("end");
     }
@@ -43,7 +38,12 @@ const Game = () => {
   if (show === "start") {
     return (
       <div className="mx-60">
-        <Questions count={count} incrementCounter={incrementCounter} />
+        <Questions
+          count={count}
+          incrementCounter={incrementCounter}
+          results={results}
+          setResults={setResults}
+        />
       </div>
     );
   }
@@ -51,7 +51,7 @@ const Game = () => {
   if (show === "end") {
     return (
       <div className="mx-60">
-        <Result />
+        <Result results={results} />
         Falta mostrar as estatisticas do jogo... Falta botao para reiniciar o
         jogo..
       </div>
