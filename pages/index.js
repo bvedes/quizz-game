@@ -7,7 +7,6 @@ const Game = () => {
   const [show, setShow] = useState("init");
   const [count, setCount] = useState(0);
   const [results, setResults] = useState([]);
-  console.log("results: ", results);
 
   const incrementCounter = () => {
     setCount(count + 1);
