@@ -7,9 +7,16 @@ const Game = () => {
   const [show, setShow] = useState("init");
   const [count, setCount] = useState(0);
   const [results, setResults] = useState([]);
+  console.log("results: ", results);
 
   const incrementCounter = () => {
     setCount(count + 1);
+  };
+
+  const handleRestart = () => {
+    setShow("init");
+    setCount(0);
+    setResults([]);
   };
 
   useEffect(() => {
@@ -22,7 +29,7 @@ const Game = () => {
     return (
       <div className="grid grid-rows-3 grid-flow-col gap-4 mt-16 mx-60">
         <div className="col-span-2 bg-gray-100 flex p-2 items-center justify-center">
-          Game of Quizz
+          Game Quizz
         </div>
 
         <button
@@ -51,9 +58,7 @@ const Game = () => {
   if (show === "end") {
     return (
       <div className="mx-60">
-        <Result results={results} />
-        Falta mostrar as estatisticas do jogo... Falta botao para reiniciar o
-        jogo..
+        <Result results={results} handleRestart={handleRestart} />
       </div>
     );
   }
