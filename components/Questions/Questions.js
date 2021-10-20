@@ -34,28 +34,29 @@ const Questions = ({ incrementCounter, results, setResults }) => {
   };
 
   return (
-    <div>
+    <div className="w-1/2">
       <div className="mt-16">
         <div className="border-4 my-8 border-opacity-25 bg-gray-100 flex p-2 items-center justify-center">
           {question.question}
         </div>
-        <div className="border-4 my-8 border-opacity-25 bg-gray-100 flex p-2 items-center justify-center">
-          {question.options.map((option, idx) => {
-            return (
-              <div key={idx} className="flex">
-                <button
-                  className="bg-grey-500 p-2 mx-2"
-                  onClick={() => handleSolution(option)}
-                >
-                  {option}
-                </button>
-              </div>
-            );
-          })}
-        </div>
+        {question.options.map((option, idx) => {
+          return (
+            <div
+              key={idx}
+              className="flex border-4 border-opacity-25 bg-gray-100 mb-2"
+            >
+              <button
+                className="p-2 px-4"
+                onClick={() => handleSolution(option)}
+              >
+                {option}
+              </button>
+            </div>
+          );
+        })}
       </div>
       {solution ? (
-        <div className="flex p-4 border-4 border-opacity-25 bg-gray-100 items-center">
+        <div className="p-4 border-4 border-opacity-25 bg-gray-100 items-center lg:flex">
           Solution:
           <div className="ml-2">{solution}</div>
           <button className="ml-auto text-xl" onClick={() => nextQuestion()}>

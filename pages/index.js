@@ -19,21 +19,21 @@ const Game = () => {
   };
 
   useEffect(() => {
-    if (count > 2) {
+    if (count > 3) {
       setShow("end");
     }
   }, [count]);
 
   if (show === "init") {
     return (
-      <div className="mt-16 mx-60">
-        <div className="border-4 my-8 border-opacity-25 bg-gray-100 flex p-2 items-center justify-center">
-          Game Quizz
-        </div>
-        <div className="border-4 border-opacity-25 bg-gray-100 flex p-2 items-center justify-center">
-          <button className="" onClick={() => setShow("start")}>
-            Start Game
-          </button>
+      <div className="mt-16 mx-60 flex items-center justify-center">
+        <div className="w-1/2">
+          <div className="border-4 my-8 border-opacity-25 bg-gray-100 p-4 flex items-center justify-center">
+            Game Quizz
+          </div>
+          <div className="border-4 border-opacity-25 bg-gray-100 p-4 flex items-center justify-center">
+            <button onClick={() => setShow("start")}>Start Game</button>
+          </div>
         </div>
       </div>
     );
@@ -41,7 +41,7 @@ const Game = () => {
 
   if (show === "start") {
     return (
-      <div className="mx-60">
+      <div className="mx-60 flex p-6 items-center justify-center">
         <Questions
           count={count}
           incrementCounter={incrementCounter}
@@ -54,8 +54,10 @@ const Game = () => {
 
   if (show === "end") {
     return (
-      <div className="mx-60">
-        <Result results={results} handleRestart={handleRestart} />
+      <div className="mx-60 flex p-6 items-center justify-center">
+        <div className="w-1/2">
+          <Result results={results} handleRestart={handleRestart} />
+        </div>
       </div>
     );
   }
