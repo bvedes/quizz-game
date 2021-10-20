@@ -26,17 +26,15 @@ const Game = () => {
 
   if (show === "init") {
     return (
-      <div className="grid grid-rows-3 grid-flow-col gap-4 mt-16 mx-60">
-        <div className="col-span-2 bg-gray-100 flex p-2 items-center justify-center">
+      <div className="mt-16 mx-60">
+        <div className="border-4 my-8 border-opacity-25 bg-gray-100 flex p-2 items-center justify-center">
           Game Quizz
         </div>
-
-        <button
-          className="row-span-2 col-span-2 bg-gray-200 flex p-2 items-center justify-center "
-          onClick={() => setShow("start")}
-        >
-          Start Game
-        </button>
+        <div className="border-4 border-opacity-25 bg-gray-100 flex p-2 items-center justify-center">
+          <button className="" onClick={() => setShow("start")}>
+            Start Game
+          </button>
+        </div>
       </div>
     );
   }

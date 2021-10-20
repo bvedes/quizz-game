@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { questions } from "../../utils";
+import { GoChevronRight } from "react-icons/go";
 
 function getRandomInt(max) {
   return Math.floor(Math.random() * max);
@@ -13,7 +14,7 @@ const Questions = ({ incrementCounter, results, setResults }) => {
 
   const handleSolution = (userAnswer) => {
     const isCorrect = userAnswer === question.solution;
-    const score = isCorrect ? 1 : -1;
+    const score = isCorrect ? 10 : -10;
     renderSolution(isCorrect);
     setResults([...results, { ...question, userAnswer, isCorrect, score }]);
   };
@@ -25,6 +26,7 @@ const Questions = ({ incrementCounter, results, setResults }) => {
       setSolution(`Wrong, the right answer is ${question.solution}`);
     }
   }
+
   const nextQuestion = () => {
     setSolution();
     incrementCounter();
@@ -33,11 +35,11 @@ const Questions = ({ incrementCounter, results, setResults }) => {
 
   return (
     <div>
-      <div className="grid grid-rows-3 grid-flow-col gap-4 mt-16">
-        <div className="col-span-2 bg-gray-100 flex p-2 items-center justify-center">
+      <div className="mt-16">
+        <div className="border-4 my-8 border-opacity-25 bg-gray-100 flex p-2 items-center justify-center">
           {question.question}
         </div>
-        <div className="row-span-2 col-span-2 bg-gray-200 flex p-2 items-center justify-center ">
+        <div className="border-4 my-8 border-opacity-25 bg-gray-100 flex p-2 items-center justify-center">
           {question.options.map((option, idx) => {
             return (
               <div key={idx} className="flex">
@@ -53,9 +55,12 @@ const Questions = ({ incrementCounter, results, setResults }) => {
         </div>
       </div>
       {solution ? (
-        <div className="flex justify-between p-4">
-          Solution:{solution}
-          <button onClick={() => nextQuestion()}>next</button>
+        <div className="flex p-4 border-4 border-opacity-25 bg-gray-100 items-center">
+          Solution:
+          <div className="ml-2">{solution}</div>
+          <button className="ml-auto text-xl" onClick={() => nextQuestion()}>
+            <GoChevronRight />
+          </button>
         </div>
       ) : null}
     </div>
