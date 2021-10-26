@@ -4,11 +4,9 @@ const Result = ({ results, handleRestart }) => {
   const totalScore = results.map(({ score }) => score).reduce((a, b) => a + b);
 
   return (
-    <div className="">
-      <div className="mt-16 justify-center items-center">
-        <div className="flex justify-between">
-          <div className="p-4">Result:</div>
-        </div>
+    <div className="w-full">
+      <div className="justify-center items-center">
+        <div className="flex justify-between"></div>
         {results.map((result, idx) => {
           const { question, solution, userAnswer } = result;
 
@@ -19,18 +17,18 @@ const Result = ({ results, handleRestart }) => {
             >
               <div className="bg-gray-100 flex">
                 <div>
-                  <div className="font-extrabold">{question}</div>
-                  <div className="p-2 lg:flex">
+                  <div className="font-extrabold mb-4">{question}</div>
+                  <div className="lg:flex">
                     Your answer was:
                     {userAnswer === solution ? (
-                      <p className="lg:ml-10 text-green-600">{userAnswer}</p>
+                      <p className="lg:ml-2 text-green-600">{userAnswer}</p>
                     ) : (
-                      <p className="lg:ml-10 text-red-600">{userAnswer}</p>
+                      <p className="lg:ml-2 text-red-600">{userAnswer}</p>
                     )}
                   </div>
-                  <div className="lg:flex p-2">
+                  <div className="lg:flex">
                     The right answer is:
-                    <p className="lg:ml-6 text-green-600">{solution}</p>
+                    <p className="lg:ml-2 text-green-600">{solution}</p>
                   </div>
                 </div>
               </div>
@@ -38,12 +36,17 @@ const Result = ({ results, handleRestart }) => {
           );
         })}
       </div>
-      <div className="lg:justify-between items-center p-4 lg:flex bg-gray-100">
-        <div className="lg:flex">
-          Score:
-          <div className="ml-4">{totalScore}</div>
+      <div className="lg:justify-between items-center p-4 lg:flex bg-indigo-500">
+        <div className="lg:flex items-center text-white px-3 py-2">
+          <div>Score:</div>
+          <div className="ml-2">{totalScore}</div>
         </div>
-        <button onClick={() => handleRestart()}>Restart</button>
+        <button
+          className="sm:ml-auto bg-indigo-800 text-white px-4 py-2 rounded-sm shadow-sm"
+          onClick={() => handleRestart()}
+        >
+          Restart
+        </button>
       </div>
     </div>
   );

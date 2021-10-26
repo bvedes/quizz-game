@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { questions } from "../../utils";
-import { GoChevronRight } from "react-icons/go";
 
 function getRandomInt(max) {
   return Math.floor(Math.random() * max);
@@ -11,6 +10,7 @@ const Questions = ({ incrementCounter, results, setResults }) => {
   const [question, setQuestion] = useState(
     questions[getRandomInt(questions.length)]
   );
+  const [disable, setDisable] = useState(false);
 
   const handleSolution = (userAnswer) => {
     const isCorrect = userAnswer === question.solution;
@@ -21,9 +21,9 @@ const Questions = ({ incrementCounter, results, setResults }) => {
 
   function renderSolution(isCorrect) {
     if (isCorrect) {
-      setSolution("Correct");
+      setSolution(true);
     } else {
-      setSolution(`Wrong, the right answer is ${question.solution}`);
+      setSolution(false);
     }
   }
 
@@ -34,33 +34,51 @@ const Questions = ({ incrementCounter, results, setResults }) => {
   };
 
   return (
-    <div className="w-1/2">
-      <div className="mt-16">
-        <div className="border-4 my-8 border-opacity-25 bg-gray-100 flex p-2 items-center justify-center">
-          {question.question}
-        </div>
+    <div className="w-full">
+      <div className="flex items-center justify-center py-4 text-3xl">
+        {question.question}
+      </div>
+      <div className="py-2">Please, pick the right answer:</div>
+      <div className="flex flex-col gap-4">
         {question.options.map((option, idx) => {
           return (
-            <div
+            <button
               key={idx}
-              className="flex border-4 border-opacity-25 bg-gray-100 mb-2"
+              className="py-4 px-4 rounded-sm shadow-sm bg-indigo-500 text-white text-left w-full"
+              disabled={disable}
+              onClick={() => {
+                console.log("option: ", option);
+                handleSolution(option);
+                setDisable(true);
+              }}
             >
-              <button
-                className="p-2 px-4"
-                onClick={() => handleSolution(option)}
-              >
-                {option}
-              </button>
-            </div>
+              {option}
+            </button>
           );
         })}
       </div>
-      {solution ? (
-        <div className="p-4 border-4 border-opacity-25 bg-gray-100 items-center lg:flex">
-          Solution:
-          <div className="ml-2">{solution}</div>
-          <button className="ml-auto text-xl" onClick={() => nextQuestion()}>
-            <GoChevronRight />
+      {solution !== undefined ? (
+        <div className="flex flex-col sm:flex-row gap-4 items-center mt-8 p-4 bg-gray-100 rounded-sm shadow-sm">
+          <div className="text-center sm:text-left">
+            {solution ? (
+              <span className="text-green-500 font-semibold">Correct</span>
+            ) : (
+              <span className="text-red-500 font-semibold">
+                Wrong, the answer is:
+                <span className="text-green-600 font-semibold">
+                  {question.solution}
+                </span>
+              </span>
+            )}
+          </div>
+          <button
+            className="sm:ml-auto bg-indigo-800 text-white px-4 py-2 rounded-sm shadow-sm"
+            onClick={() => {
+              nextQuestion();
+              setDisable(false);
+            }}
+          >
+            Next Question
           </button>
         </div>
       ) : null}

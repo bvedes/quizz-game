@@ -26,22 +26,21 @@ const Game = () => {
 
   if (show === "init") {
     return (
-      <div className="mt-16 mx-60 flex items-center justify-center">
-        <div className="w-1/2">
-          <div className="border-4 my-8 border-opacity-25 bg-gray-100 p-4 flex items-center justify-center">
-            Game Quizz
-          </div>
-          <div className="border-4 border-opacity-25 bg-gray-100 p-4 flex items-center justify-center">
-            <button onClick={() => setShow("start")}>Start Game</button>
-          </div>
-        </div>
+      <div className="sm:w-[800px] mx-auto p-4 sm:pt-24 flex flex-col gap-4 items-center justify-center">
+        <div className="text-3xl">Benvinda&apos;s Quizz Game</div>
+        <button
+          className="px-4 py-2 bg-indigo-800 text-white font-semibold"
+          onClick={() => setShow("start")}
+        >
+          Start Game
+        </button>
       </div>
     );
   }
 
   if (show === "start") {
     return (
-      <div className="mx-60 flex p-6 items-center justify-center">
+      <div className="sm:w-[800px] mx-auto p-4 sm:pt-24 flex items-center justify-center">
         <Questions
           count={count}
           incrementCounter={incrementCounter}
@@ -54,10 +53,8 @@ const Game = () => {
 
   if (show === "end") {
     return (
-      <div className="mx-60 flex p-6 items-center justify-center">
-        <div className="w-1/2">
-          <Result results={results} handleRestart={handleRestart} />
-        </div>
+      <div className="sm:w-[800px] mx-auto p-4 sm:pt-24 flex items-center justify-center">
+        <Result results={results} handleRestart={handleRestart} />
       </div>
     );
   }
