@@ -44,10 +44,9 @@ const Questions = ({ incrementCounter, results, setResults }) => {
           return (
             <button
               key={idx}
-              className="py-4 px-4 rounded-sm shadow-sm bg-indigo-500 text-white text-left w-full"
+              className="py-4 px-4 rounded-sm shadow-sm bg-indigo-500 text-white disabled:opacity-50 cursor-not-allowed text-left w-full"
               disabled={disable}
               onClick={() => {
-                console.log("option: ", option);
                 handleSolution(option);
                 setDisable(true);
               }}

@@ -1,6 +1,4 @@
 const Result = ({ results, handleRestart }) => {
-  console.log("results: ", results);
-
   const totalScore = results.map(({ score }) => score).reduce((a, b) => a + b);
 
   return (
